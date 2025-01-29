@@ -1,2 +1,3 @@
 wcTest1
 wcTest2
+wcTest3

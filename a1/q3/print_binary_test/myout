@@ -1,0 +1,12 @@
+Test test1 passed
+Test test2 passed
+Test test3 failed
+Expected output:
+1011011001000
+Actual output:
+0001001101101
+Test test4 failed
+Expected output:
+11101110
+Actual output:
+01110111

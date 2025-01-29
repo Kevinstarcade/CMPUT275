@@ -1,0 +1,54 @@
+#!/bin/bash
+
+# $1: your command to run/test
+# $2: test set file
+# $3: sample program
+
+if [[ $# -ne 2 && $# -ne 3 ]]; then
+	echo "Usage: ./runTests commandToTest testSetFile [sampleProgram]"
+	exit 0
+fi
+
+for stem in $(cat $2); do
+	myTemp=$(mktemp)
+
+	# check for args
+	if [[ -e ${stem}.args ]]; then
+		args=${stem}.args
+	else
+		args=""
+	fi
+
+	# check for sample program
+	if [[ -n $3 ]]; then
+		outputFile=$(mktemp)
+		$3 < ${stem}.in > ${outputFile}
+	elif [[ -e ${stem}.out ]]; then
+		outputFile=${stem}.out
+	else
+		echo "${stem}: no output file or sample program detected"
+		continue
+	fi
+
+	$1 ${args} < ${stem}.in > ${myTemp}
+
+	diff ${myTemp} ${outputFile} &>/dev/null
+
+	if [[ $? == 1 ]]; then
+		echo "Test ${stem} failed"
+		echo "Expected output:"
+		cat $outputFile
+		echo "Actual output:"
+		cat ${myTemp}
+
+	else
+		echo "Test ${stem} passed"
+	fi
+
+
+	# remove files
+	rm ${myTemp}
+	if [[ -e outputFile && outputFile != ${stem}.out ]]; then
+		rm ${outputFile}
+	fi
+done

@@ -4,12 +4,14 @@ if [[ $# -ne 1 ]]; then
    exit 0
 fi
 
-if [[ -e $1 ]]; then
-   for stem in $(cat $1); do
-      if [[ -e "${stem}.desc" ]]; then
-         cat  ${stem}.desc
-      else
-         echo "${stem} No test description"
-      fi
-   done
+if [[ ! -e $1 ]]; then
+   exit 0
 fi
+for stem in $(cat $1); do
+   if [[ -e "${stem}.desc" ]]; then
+      cat  ${stem}.desc
+   else
+      echo "${stem} No test description"
+   fi
+done
+

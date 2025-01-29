@@ -1,12 +1,12 @@
 #!/bin/bash
 if [[ $# -ne 2 ]]; then
-	echo "Usage: ./runInTests commandToTest testSetFile"
+	echo "Usage: ./runTests commandToTest testSetFile"
 	exit 0
 fi
 
 for stem in $(cat $2); do
 	myTemp=$(mktemp)
-	$1 < ${stem}.in > ${myTemp}
+	$1 $(cat ${stem}.args) < ${stem}.in > ${myTemp}
 
 	diff ${myTemp} ${stem}.out &>/dev/null
 

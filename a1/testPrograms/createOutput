@@ -1,0 +1,12 @@
+#!/bin/bash
+if [[ $# -ne 1 ]]; then
+	echo "Usage: ./createOutput command"
+	echo "creates .out files for all .in files in working directory"
+	exit 0;
+fi
+
+
+for file in *.in; do
+	stem="${file%.in}"
+	$1 < $file > $stem.out
+done
