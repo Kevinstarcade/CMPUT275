@@ -1,0 +1,8 @@
+- getchar(): reads one line from std in and eats the char.
+    ex. int c = getchar()
+
+- scanf: reads for desired type from std in.
+    ex. int x; int retCode = scanf("%d", x);
+    - returns exit status (0 if it does not find desired type, 1 if success)
+    - does not eat char if it fails
+    - ignores whitespace
