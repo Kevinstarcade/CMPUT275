@@ -1,8 +1,31 @@
 - getchar(): reads one line from std in and eats the char.
-    ex. int c = getchar()
+    ex. int c = getchar()   
 
 - scanf: reads for desired type from std in.
     ex. int x; int retCode = scanf("%d", x);
     - returns exit status (0 if it does not find desired type, 1 if success)
     - does not eat char if it fails
     - ignores whitespace
+
+
+### Const
+const int x = 10; 
+x = 5; // illegal
+--------------------------------------------------------------------------------
+int x = 5;
+int y = 10;
+int z = 15;
+
+const int *px = &x; // cannot change x through px
+*px = 10; // illegal
+px = &z; // legal
+x = 10 // still legal because only the dereferenced pointer is const
+// functions take pointers to values to mutate them instead of the actual variable
+// passing an array into a function also passes the pointer to the first index
+// making this const stops the function from changing these dereferenced pointers (functions like findMax)
+
+int * const py = &y; // cannot change the pointer itself
+*py = 15; // legal
+py = &x // illegal
+
+int const *pz = &z; // same as what happens to x
