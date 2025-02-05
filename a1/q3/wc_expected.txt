@@ -1,0 +1,7 @@
+Test wcTest1 passed
+Test wcTest2 failed
+Expected output:
+  9  60 327
+
+Actual output:
+  9  60 329

@@ -1,0 +1,25 @@
+#!/bin/bash
+if [[ $# -ne 2 ]]; then
+	echo "Usage: ./runInTests commandToTest testSetFile"
+	exit 0
+fi
+
+for stem in $(cat $2); do
+	myTemp=$(mktemp)
+	$1 < ${stem}.in > ${myTemp}
+
+	diff ${myTemp} ${stem}.out &>/dev/null
+
+	if [[ $? == 1 ]]; then 
+		echo "Test ${stem} failed"
+		echo "Expected output:"
+		cat ${stem}.out
+		echo "Actual output:"
+		cat ${myTemp}
+
+	else 
+		echo "Test ${stem} passed"
+	fi
+
+	rm ${myTemp}
+done

@@ -1,0 +1,17 @@
+#!/bin/bash
+if [[ $# -ne 1 ]]; then
+   echo "Usage: ./testDescribe_sample testSetFile" >&2
+   exit 0
+fi
+
+if [[ ! -e $1 ]]; then
+   exit 0
+fi
+for stem in $(cat $1); do
+   if [[ -e "${stem}.desc" ]]; then
+      cat  ${stem}.desc
+   else
+      echo "${stem} No test description"
+   fi
+done
+
