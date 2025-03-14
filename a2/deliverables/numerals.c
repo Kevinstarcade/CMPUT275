@@ -18,7 +18,7 @@ int numerals() {
 	char c;
 	int cnum;
 
-	for (c = getchar(); c != '\n'; pnum = cnum, c = getchar()) {
+	for (c = getchar(); c != EOF; pnum = cnum, c = getchar()) {
 		cnum = letterToNum(c);
 		if (cnum > pnum) pnum = -pnum;
 		sum += pnum;
